@@ -17,7 +17,9 @@ public class WebServicesController {
 	@RequestMapping(value = "/book", method = RequestMethod.POST)
 	public Book saveBook(Book book)
 	{
-	return repository.save(book);
+		Optional<Book> optBook=repository.findById(String id);
+		if(! optBook.isPresent()) throw Exception("Book Not Found");
+		return repository.save(book);
 	}
 	
 	@RequestMapping(value = "/book/{title}", method = RequestMethod.GET)
